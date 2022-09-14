@@ -1,0 +1,72 @@
+.App {
+    @apply
+    max-w-[1344px]
+    mx-auto
+    flex
+    flex-col
+    items-center
+    my-20
+}
+
+.App .title {
+    @apply
+    text-6xl
+    text-white
+    font-black
+    mt-20
+}
+
+.App .title .gradient {
+    @apply
+    bg-nlw-Gradient 
+    bg-clip-text 
+    text-transparent
+}
+
+.gradientBorder{
+    @apply
+    pt-1
+    bg-nlw-Gradient
+    self-stretch
+    rounded-lg
+    overflow-hidden
+    mt-8
+}
+
+.container-PublishBox{
+    @apply
+    bg-[#2A2634]
+    px-8
+    py-6
+    self-stretch
+    rounded-lg
+    flex
+    justify-between
+    items-center
+}
+
+.container-PublishBox strong{
+    @apply
+    text-2xl
+    text-white
+    font-black
+    block
+}
+.container-PublishBox span {
+    @apply
+    text-zinc-400
+    block
+}
+
+.btn-publish {
+    @apply
+    py-3
+    px-3
+    bg-violet-500
+    text-white
+    rounded
+    hover:bg-violet-600
+    flex
+    items-center
+    gap-3
+}
