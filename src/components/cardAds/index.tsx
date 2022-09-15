@@ -15,7 +15,7 @@ export function CardAds(props: CardsAdsProps) {
 
         <div className='text-Box'>
             <strong>{title}</strong>
-            <span>{quantAds}</span>
+            <span>{quantAds} anúncio(s)</span>
         </div>
     </a>
   )

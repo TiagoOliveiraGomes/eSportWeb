@@ -3,8 +3,29 @@ import './styles/app.css'
 import logoImg from './assets/Logo.svg'
 import { GridAds } from './components/gridAds'
 import { MagnifyingGlassPlus} from 'phosphor-react'
+import { CreateAdBanner } from './components/createAdBanner'
+import { useEffect, useState } from 'react'
 
+interface Game {
+  id: string,
+  title: string,
+  bunnerUrl: string,
+  _count: {
+    ads: number
+  }
+}
 function App() {
+
+  const [games, setGames] = useState<Game[]>([])
+
+  useEffect(()=>{
+    async function getGames () {
+      const response = await fetch('http://localhost:3333/games')
+      const data = await response.json()
+      setGames(data)
+    }
+    getGames()
+  }, [])
 
   return (
     <div className="App">
@@ -12,18 +33,7 @@ function App() {
       <h1 className='title'>Seu <span className='gradient'>duo</span> está aqui.</h1>
 
       <GridAds />
-      <div className='gradientBorder'>
-        <div className='container-PublishBox'>
-          <div>
-            <strong>Não encontrou seu duo?</strong>
-            <span>Public um anúncio para encontrar  novos players!</span>
-          </div>
-          <button className='btn-publish'>
-          <MagnifyingGlassPlus size={24} />
-            Publicar anúncio
-            </button>
-        </div>
-      </div>
+      <CreateAdBanner />
     </div>
   )
 }
