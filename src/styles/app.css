@@ -100,3 +100,30 @@
     w-[480px]
     shadow-black/25
 }
+
+.dialog-title{
+    @apply
+    text-3xl
+    font-black
+}
+
+.container-form-dialog{
+    @apply
+    flex
+    flex-col
+    gap-2
+}
+.dialog-form{
+    @apply
+    mt-8
+    flex
+    flex-col
+    gap-4
+}
+
+.dialog-grid-input{
+    @apply
+    grid
+    grid-cols-2
+    gap-6
+}
