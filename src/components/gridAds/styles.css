@@ -1,7 +1,0 @@
-.cards-grid {
-    @apply
-    grid
-    grid-cols-6
-    gap-6
-    mt-16
-}

@@ -1,11 +1,11 @@
+import * as Dialog from '@radix-ui/react-dialog'
 import './styles/main.css'
 import './styles/app.css'
 import logoImg from './assets/Logo.svg'
-import { GridAds } from './components/gridAds'
-import { MagnifyingGlassPlus} from 'phosphor-react'
 import { CreateAdBanner } from './components/createAdBanner'
 import { useEffect, useState } from 'react'
 import { CardAds } from './components/cardAds'
+
 
 interface Game {
   id: string,
@@ -46,7 +46,25 @@ function App() {
         })}
         
       </div>
-      <CreateAdBanner />
+
+      <Dialog.Root>
+
+        <CreateAdBanner />
+
+        <Dialog.Portal>
+          <Dialog.Overlay className='dialog-Overlay' />
+
+          <Dialog.Content className='dialog-container-content'>
+            <Dialog.Title>Publique um anúncio</Dialog.Title>
+
+            <Dialog.Content>
+              kaskdaksd
+            </Dialog.Content>
+
+          </Dialog.Content>
+        </Dialog.Portal>
+
+      </Dialog.Root>
     </div>
   )
 }
