@@ -2,9 +2,9 @@ import React from 'react'
 import './styles.css'
 
 interface CardsAdsProps {
-    title?: string,
+    title: string,
     imgSrc: string,
-    quantAds: string
+    quantAds: number
 }
 
 export function CardAds(props: CardsAdsProps) {
