@@ -73,3 +73,7 @@
     text-zinc-500
     text-sm
 }
+.item-select{
+    @apply
+    text-white
+}

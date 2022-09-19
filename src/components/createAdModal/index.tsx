@@ -8,15 +8,15 @@ import { InputForm } from "../inputForm";
 import { CaretDown, Check, GameController } from "phosphor-react";
 import { Game } from "../../App";
 export function CreateAdModal() {
-  const [games, setGames] = useState<string[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
 
   function getGamesTitle() {
       
     return (
-      games?.map((title) => {
+      games?.map((game) => {
         return(
-      <Select.Item className="item-select" value={title}>
-        <Select.ItemText>{title}</Select.ItemText>
+      <Select.Item className="item-select" value={game.id}>
+        <Select.ItemText>{game.title}</Select.ItemText>
         <Select.ItemIndicator>
           <Check className="w-4 h-4 text-emerald-400" />
         </Select.ItemIndicator>
@@ -30,11 +30,7 @@ export function CreateAdModal() {
     async function getGames() {
       const response = await fetch("http://localhost:3333/games");
       const data = await response.json();
-      let gameList: string[] = [];
-      data.map((game: Game) => {
-        gameList.push(game.title);
-      });
-      isMount && setGames(gameList);
+      isMount && setGames(data);
     }
     getGames();
 
