@@ -4,22 +4,24 @@ import "./styles.css";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import * as Select from "@radix-ui/react-select";
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { InputForm } from "../inputForm";
 import { CaretDown, Check, GameController } from "phosphor-react";
 import { Game } from "../../App";
 export function CreateAdModal() {
   const [games, setGames] = useState<Game[]>([]);
+  const [weekDays, setWeekDays] = useState<string[]>([])
 
   function getGamesTitle() {
       
     return (
       games?.map((game) => {
         return(
-      <Select.Item className="item-select" value={game.id}>
-        <Select.ItemText>{game.title}</Select.ItemText>
+      <Select.Item key={game.id} className="item-select" value={game.id}>
         <Select.ItemIndicator>
           <Check className="w-4 h-4 text-emerald-400" />
         </Select.ItemIndicator>
+        <Select.ItemText>{game.title}</Select.ItemText>
       </Select.Item>)}
     )
     )
@@ -61,9 +63,9 @@ export function CreateAdModal() {
                 </Select.Icon>
               </Select.Trigger>
 
-              <Select.Portal>
-              <Select.Content>
-                <Select.Viewport>
+              <Select.Portal >
+              <Select.Content >
+                <Select.Viewport className='select-viewport'>
                   {
                     getGamesTitle()
                   }
@@ -96,29 +98,64 @@ export function CreateAdModal() {
           <div className="flex gap-6">
             <div className="container-form-dialog">
               <label htmlFor="weekDays">Quando costuma jogar</label>
-              <div className="grid grid-cols-4 gap-2">
-                <button title="Domingo" className="w-8 h-8 rounded bg-zinc-900">
-                  D
-                </button>
-                <button title="Segunda" className="w-8 h-8 rounded bg-zinc-900">
-                  S
-                </button>
-                <button title="Terça" className="w-8 h-8 rounded bg-zinc-900">
-                  T
-                </button>
-                <button title="Quarta" className="w-8 h-8 rounded bg-zinc-900">
-                  Q
-                </button>
-                <button title="Quinta" className="w-8 h-8 rounded bg-zinc-900">
-                  Q
-                </button>
-                <button title="Sexta" className="w-8 h-8 rounded bg-zinc-900">
-                  S
-                </button>
-                <button title="Sábado" className="w-8 h-8 rounded bg-zinc-900">
-                  S
-                </button>
-              </div>
+              
+                <ToggleGroup.Root 
+                type="multiple" 
+                className="grid grid-cols-4 gap-2"
+                value={weekDays}
+                onValueChange={setWeekDays}
+                >
+                  <ToggleGroup.Item 
+                  value="0" 
+                  title="Domingo" 
+                  className={`ToggleGroup-Item ${weekDays.includes('0')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    D
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="1" 
+                  title="Segunda" 
+                  className={`ToggleGroup-Item ${weekDays.includes('1')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    S
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="2" 
+                  title="Terça" 
+                  className={`ToggleGroup-Item ${weekDays.includes('2')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    T
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="3" 
+                  title="Quarta" 
+                  className={`ToggleGroup-Item ${weekDays.includes('3')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    Q
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="4" 
+                  title="Quinta" 
+                  className={`ToggleGroup-Item ${weekDays.includes('4')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    Q
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="5" 
+                  title="Sexta" 
+                  className={`ToggleGroup-Item ${weekDays.includes('5')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    S
+                  </ToggleGroup.Item>
+                  <ToggleGroup.Item 
+                  value="6" 
+                  title="Sábado" 
+                  className={`ToggleGroup-Item ${weekDays.includes('6')? 'bg-violet-500' : 'bg-zinc-900'}`}
+                  >
+                    S
+                  </ToggleGroup.Item>
+                </ToggleGroup.Root>
+              
             </div>
             <div className="container-form-dialog flex-1">
               <label htmlFor="hourStart">Qual horário do dia?</label>
@@ -129,14 +166,14 @@ export function CreateAdModal() {
             </div>
           </div>
 
-          <div className="container-checkbox">
+          <label className="container-checkbox">
             <Checkbox.Root className="checkbox-root">
               <Checkbox.Indicator>
                 <Check className="w-4 h-4 text-emerald-400" />
               </Checkbox.Indicator>
             </Checkbox.Root>
             Costumo me conectar ao chat de voz
-          </div>
+          </label>
 
           <footer className="mt-4 flex justify-end gap-4">
             <Dialog.Close

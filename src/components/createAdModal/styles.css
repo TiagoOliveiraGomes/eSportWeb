@@ -65,6 +65,7 @@
 .container-select{
     @apply
     flex
+    relative
     justify-between
     items-center
     px-4 py-3
@@ -75,5 +76,23 @@
 }
 .item-select{
     @apply
+    flex
     text-white
+    my-[16px]
+}
+
+.select-viewport{
+    @apply
+    bg-zinc-900
+    px-4 py-3
+    fixed
+    top-0
+    left-0
+}
+
+
+.ToggleGroup-Item{
+    @apply
+    w-8 h-8 
+    rounded 
 }
