@@ -15,9 +15,11 @@ export function CreateAdModal() {
     return (
       games?.map((title) => {
         return(
-      <Select.Item value={title}>
+      <Select.Item className="item-select" value={title}>
         <Select.ItemText>{title}</Select.ItemText>
-        <Select.ItemIndicator>…</Select.ItemIndicator>
+        <Select.ItemIndicator>
+          <Check className="w-4 h-4 text-emerald-400" />
+        </Select.ItemIndicator>
       </Select.Item>)}
     )
     )
@@ -56,8 +58,8 @@ export function CreateAdModal() {
               Qual o game?
             </label>
             <Select.Root>
-              <Select.Trigger>
-                <Select.Value placeholder="Pick an option" />
+              <Select.Trigger className="container-select">
+                <Select.Value placeholder="Selecione o game que deseja jogar" />
                 <Select.Icon>
                   <CaretDown />
                 </Select.Icon>
