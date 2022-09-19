@@ -14,10 +14,11 @@ export function CreateAdModal() {
       
     return (
       games?.map((title) => {
+        return(
       <Select.Item value={title}>
         <Select.ItemText>{title}</Select.ItemText>
         <Select.ItemIndicator>…</Select.ItemIndicator>
-      </Select.Item>}
+      </Select.Item>)}
     )
     )
   }
@@ -66,13 +67,7 @@ export function CreateAdModal() {
               <Select.Content>
                 <Select.Viewport>
                   {
-                    games?.map((title) => {
-                      return(
-                      <Select.Item value={title}>
-                        <Select.ItemText>{title}</Select.ItemText>
-                        <Select.ItemIndicator>…</Select.ItemIndicator>
-                      </Select.Item>)
-                      })
+                    getGamesTitle()
                   }
                 </Select.Viewport>
               </Select.Content>
