@@ -5,11 +5,10 @@ import { CreateAdBanner } from './components/createAdBanner'
 import { useEffect, useState } from 'react'
 import { CardAds } from './components/cardAds'
 import * as Dialog from '@radix-ui/react-dialog'
-
 import { CreateAdModal } from './components/createAdModal'
 
 
-interface Game {
+export interface Game {
   id: string,
   title: string,
   bannerUrl: string,
