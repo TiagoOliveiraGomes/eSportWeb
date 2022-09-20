@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { CardAds } from './components/cardAds'
 import * as Dialog from '@radix-ui/react-dialog'
 import { CreateAdModal } from './components/createAdModal'
+import axios from 'axios'
 
 
 export interface Game {
@@ -23,8 +24,8 @@ function App() {
   useEffect(()=>{
     let isMount = true
     async function getGames () {
-      const response = await fetch('http://localhost:3333/games')
-      const data = await response.json()
+      const response = await axios('http://localhost:3333/games')
+      const data = await response.data
       isMount && setGames(data)
     }
     getGames()

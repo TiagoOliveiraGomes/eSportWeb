@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import "./styles.css";
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
@@ -8,9 +8,13 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { InputForm } from "../inputForm";
 import { CaretDown, Check, GameController } from "phosphor-react";
 import { Game } from "../../App";
+import axios from 'axios'
+
+
 export function CreateAdModal() {
   const [games, setGames] = useState<Game[]>([]);
   const [weekDays, setWeekDays] = useState<string[]>([])
+  const [useVoiceChannel, setUseVoiceChannel] = useState<boolean>(false)
 
   function getGamesTitle() {
       
@@ -27,11 +31,19 @@ export function CreateAdModal() {
     )
   }
 
+  function handleCreateAd(event:FormEvent){
+    event.preventDefault()
+
+    const formData = new FormData(event.target as HTMLFormElement)
+    const data = Object.fromEntries(formData)
+    console.log(data)
+  }
+
   useEffect(() => {
     let isMount = true;
     async function getGames() {
-      const response = await fetch("http://localhost:3333/games");
-      const data = await response.json();
+      const response = await axios("http://localhost:3333/games");
+      const data = await response.data;
       isMount && setGames(data);
     }
     getGames();
@@ -39,7 +51,7 @@ export function CreateAdModal() {
     return () => {
       isMount = false;
     };
-  }, []);
+  }, [])
 
   return (
     <Dialog.Portal>
@@ -50,12 +62,12 @@ export function CreateAdModal() {
           Publique um anúncio
         </Dialog.Title>
 
-        <form className="dialog-form">
+        <form onSubmit={handleCreateAd} className="dialog-form">
           <div className="container-form-dialog">
             <label htmlFor="game" className="font-semibold">
               Qual o game?
             </label>
-            <Select.Root>
+            <Select.Root name="game">
               <Select.Trigger className="container-select">
                 <Select.Value placeholder="Selecione o game que deseja jogar" />
                 <Select.Icon>
@@ -77,7 +89,7 @@ export function CreateAdModal() {
 
           <div className="container-form-dialog">
             <label htmlFor="name">Seu nome (ou nickname)</label>
-            <InputForm id="name" placeholder="Como te chamam dentro do game" />
+            <InputForm name="name" id="name" placeholder="Como te chamam dentro do game" />
           </div>
 
           <div className="dialog-grid-input">
@@ -85,13 +97,14 @@ export function CreateAdModal() {
               <label htmlFor="yearsPlaying">Joga há quantos anos?</label>
               <InputForm
                 type="number"
+                name="yearsPlaying"
                 id="yearsPlaying"
                 placeholder="Tudo bem ser Zero"
               />
             </div>
             <div className="container-form-dialog">
               <label htmlFor="discord">Qual seu discord?</label>
-              <InputForm id="discord" placeholder="Usuario#0000" />
+              <InputForm name="discord" id="discord" placeholder="Usuario#0000" />
             </div>
           </div>
 
@@ -160,14 +173,24 @@ export function CreateAdModal() {
             <div className="container-form-dialog flex-1">
               <label htmlFor="hourStart">Qual horário do dia?</label>
               <div className="grid grid-cols-2 gap-2">
-                <InputForm id="hourStart" type="time" placeholder="De" />
-                <InputForm id="hourEnd" type="time" placeholder="Até" />
+                <InputForm name="hourStart" id="hourStart" type="time" placeholder="De" />
+                <InputForm name="hourEnd" id="hourEnd" type="time" placeholder="Até" />
               </div>
             </div>
           </div>
 
           <label className="container-checkbox">
-            <Checkbox.Root className="checkbox-root">
+            <Checkbox.Root 
+            className="checkbox-root"
+            checked={useVoiceChannel}
+            onCheckedChange={(checked) => {
+              if(checked === true) {
+                setUseVoiceChannel(true)
+              }else {
+                setUseVoiceChannel(false)
+              }
+            }}
+            >
               <Checkbox.Indicator>
                 <Check className="w-4 h-4 text-emerald-400" />
               </Checkbox.Indicator>
